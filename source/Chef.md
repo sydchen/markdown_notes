@@ -1,4 +1,4 @@
-## Chef
+# Chef
 * Chef Server + Chef Client
 * Hosted Chef + Chef Clients
 * Chef Solo
@@ -6,8 +6,7 @@
 Chef 有3種模式, <code>Chef Solo</code>所有的cookbooks, configuration, attributes都須放在同一台機器上,
 <code>Hosted Chef + Chef Clients</code> 需要上opscood註冊,並且加入某organization, <code>Chef Server + Chef Clients</code>可以自行架設最有彈性但也最複雜
 
-### Install Chef Server
-Via bootstrap
+## Install Chef Server via bootstrap
 
 * Install Chef Solo
 * Chef Solo Configuration
@@ -46,27 +45,47 @@ sudo chef-solo -c /etc/chef/solo.rb -j ~/chef.json -r http://s3.amazonaws.com/ch
 
 * Ref
     * http://wiki.opscode.com/display/chef/Installing+Chef+Server+using+Chef+Solo
+    * http://wiki.opscode.com/display/chef/Installation
+    * http://wiki.opscode.com/display/chef/Installing+Chef+Client+and+Chef+Solo
 
-* http://wiki.opscode.com/display/chef/Installation
-* http://wiki.opscode.com/display/chef/Installing+Chef+Client+and+Chef+Solo
-
-
-### Configuration
+## Bootstrap the client node
+In client node
 
 ```
-Executable Config File Daemon?
-chef-solo/etc/chef/solo.rb Yes
-chef-client/etc/chef/client.rb Yes
-chef-server/etc/chef/server.rb Yes
-knife~/.chef/knife.rb No
+$ sudo mkdir /etc/chef
 ```
-### Knife Bootstrap
+
+In chef server, creating client configuration
+
+```
+$ knife configure client ./
+Creating client configuration
+Writing client.rb
+Writing validation.pem
+```
+
+<code>client.rb</code>
+
+```
+log_level        :info
+log_location     STDOUT
+chef_server_url  'http://10.10.10.32:4000'
+validation_client_name 'chef-validator'
+```
+
+* scp client.rb validation.pem to /etc/chef/ in client 
+
+```
+$ scp client.rb validation.pem [client node]
+```
+
+* Bootstrap
 The Bootstrap subcommand for Knife performs a Chef Bootstrap on the target node.
 
 * use password
 
 ```
-knife bootstrap IP_ADDRESS -x ubuntu -P PASSWORD --sudo
+$ knife bootstrap IP_ADDRESS -x ubuntu -P PASSWORD --sudo
 ```
 
 * use ssh key
@@ -83,15 +102,84 @@ knife bootstrap IP_ADDRESS -x ubuntu -i ~/.ssh/id_rsa --sudo
     * ubuntu10.04-apt
     * ubuntu12.04-gems
 
-* ref
+verify install completed
+
+```
+knife client list
+```
+
+### Issues - HTTP Request Returned 401 Unauthorized
+
+```
+10.10.10.12 [2012-11-05T14:56:47+08:00] INFO: *** Chef 10.14.2 ***
+10.10.10.12 [2012-11-05T14:56:48+08:00] INFO: HTTP Request Returned 401 Unauthorized: Failed to authenticate. Ensure tha
+t your client key is valid.
+```
+
+Referenced from opscode's [Common+Errors](http://wiki.opscode.com/display/chef/Common+Errors),
+recreate keys by
+
+```
+$ sudo rm /etc/chef/validation.pem /etc/chef/webui.pem
+$ sudo /etc/init.d/chef-server restart
+```
+
+### Refs
     * http://wiki.opscode.com/display/chef/Knife+Bootstrap
     * http://wiki.opscode.com/display/chef/Client+Bootstrap+Fast+Start+Guide
 
+## Knife Cookbook subcommand
+### Download cookbook
+
+```
+$ knife cookbook site list 
+$ knife cookbook site install zsh (with git)
+$ knife cookbook site download zsh (without git)
+```
+
+then untar the tgz file to <code>/var/chef/cookbooks</code>
+
+### Upload cookbook
+
+```
+$ knife cookbook upload zsh
+Uploading zsh            [1.0.0]
+Uploaded 1 cookbook.
+```
+
+check
+
+```
+$ knife cookbook list
+  vim   1.0.2
+  zsh   1.0.0
+```
+
+### Add a Cookbook to run_list
+command: 
+```
+knife node run_list add NODENAME 'recipe[getting-started]'
+```
+
+```
+$ knife node run_list add bunker 'recipe[zsh]'
+run_list:  recipe[zsh]
+```
+
+Finally we can run chef-client to install cookbooks
+
+```
+$ sudo chef-client
+[vagrant@bunker chef]$ sudo chef-client
+[2012-11-05T16:28:00+08:00] INFO: *** Chef 10.14.2 ***
+[2012-11-05T16:28:00+08:00] INFO: Run List is [recipe[zsh]]
+```
 
 
-### Docs
+## Docs
 * http://wiki.opscode.com/display/chef/Chef+Configuration+Settings
 * [chef install and update programs from source](http://stackoverflow.com/questions/8530593/chef-install-and-update-programs-from-source)
+* [A Brief Chef Tutorial](http://blog.afistfulofservers.net/post/2011/03/16/a-brief-chef-tutorial-from-concentrate/)
 
 ## Chef Solo
 ### Usage
@@ -180,15 +268,10 @@ drwxr-xr-x  3 why  wheel  102 11  1 12:43 templates
 ### Docs
 * http://wiki.opscode.com/display/chef/Resources
 * [Guide to Creating A Cookbook and Writing A Recipe](http://wiki.opscode.com/display/chef/Guide+to+Creating+A+Cookbook+and+Writing+A+Recipe)
-* [A Brief Chef Tutorial](http://blog.afistfulofservers.net/post/2011/03/16/a-brief-chef-tutorial-from-concentrate/)
 * http://www.devopsnotes.com/2012/02/how-to-write-good-chef-cookbook.html
 * http://reiddraper.com/first-chef-recipe/
 * [Working with Chef cookbooks and roles](http://agiletesting.blogspot.tw/2010/07/working-with-chef-cookbooks-and-roles.html)
 * [Configuration Management with Chef on Debian, Part 1](http://warwickp.com/2009/12/configuration-management-with-chef-on-debian-part-1/)
-
-## Knife
-### Docs
-* http://wiki.opscode.com/display/chef/Knife#Knife-Knifeconfiguration
 
 
 ## Data Bags
@@ -201,3 +284,7 @@ drwxr-xr-x  3 why  wheel  102 11  1 12:43 templates
 
 ## Cookbooks
 * [Cookbook Fast Start Guide](http://wiki.opscode.com/display/chef/Cookbook+Fast+Start+Guide)
+
+### Chef Configuration Settings
+* http://wiki.opscode.com/display/chef/Chef+Configuration+Settings
+
