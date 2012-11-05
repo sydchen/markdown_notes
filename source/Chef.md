@@ -14,7 +14,7 @@ Via bootstrap
 
 ```
 $ sudo mkdir /etc/chef/
-$ vim /etc/chef/solo.rb
+$ sudo vim /etc/chef/solo.rb
 ```
 
 <code>solo.rb</code>
@@ -31,7 +31,6 @@ cookbook_path "/tmp/chef-solo/cookbooks"
 {
   "chef_server": {
     "server_url": "http://localhost:4000"
-    #"webui_enabled": true # if webui used
   },
   "run_list": [ "recipe[chef-server::rubygems-install]" ]
 }
