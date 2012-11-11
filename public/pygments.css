@@ -54,7 +54,8 @@
 //.sr { color: #008800; background-color: #fff0ff } /* Literal.String.Regex */
 .sr { color: #008800 } /* Literal.String.Regex */
 .s1 { color: #dd2200; background-color: #fff0f0 } /* Literal.String.Single */
-.ss { color: #aa6600; background-color: #fff0f0 } /* Literal.String.Symbol */
+//.ss { color: #aa6600; background-color: #fff0f0 } /* Literal.String.Symbol */
+.ss { color: #aa6600 } /* Literal.String.Symbol */
 .bp { color: #003388 } /* Name.Builtin.Pseudo */
 .vc { color: #336699 } /* Name.Variable.Class */
 .vg { color: #dd7700 } /* Name.Variable.Global */
