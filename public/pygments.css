@@ -42,7 +42,7 @@
 .mh { color: #0000DD; font-weight: bold } /* Literal.Number.Hex */
 .mi { color: #0000DD; font-weight: bold } /* Literal.Number.Integer */
 .mo { color: #0000DD; font-weight: bold } /* Literal.Number.Oct */
-.sb { color: #dd2200; background-color: #fff0f0 } /* Literal.String.Backtick */
+.sb { color: #dd2200 } /* Literal.String.Backtick */
 .sc { color: #dd2200; background-color: #fff0f0 } /* Literal.String.Char */
 .sd { color: #dd2200; background-color: #fff0f0 } /* Literal.String.Doc */
 //.s2 { color: #dd2200; background-color: #fff0f0 } /* Literal.String.Double */
@@ -53,7 +53,7 @@
 .sx { color: #22bb22; background-color: #f0fff0 } /* Literal.String.Other */
 //.sr { color: #008800; background-color: #fff0ff } /* Literal.String.Regex */
 .sr { color: #008800 } /* Literal.String.Regex */
-.s1 { color: #dd2200; background-color: #fff0f0 } /* Literal.String.Single */
+.s1 { color: #dd2200 } /* Literal.String.Single */
 //.ss { color: #aa6600; background-color: #fff0f0 } /* Literal.String.Symbol */
 .ss { color: #aa6600 } /* Literal.String.Symbol */
 .bp { color: #003388 } /* Name.Builtin.Pseudo */

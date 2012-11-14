@@ -1,7 +1,7 @@
 # encoding: utf-8
 desc "create symbolic links from nvALT"
 task :symlinks do
-  markdown_dir = YAML.load_file('config/nvalt.yml')['markdown_dir']
+  markdown_dir = YAML.load_file('config/nvalt.yml')['nvalt_dir']
   dest_dir = File.join(Rails.root, 'source')
   FileUtils.mkdir_p(dest_dir) unless File.exist?(dest_dir)
 
