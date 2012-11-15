@@ -47,6 +47,7 @@ class MarkdownConverter
   <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
   <link href="/GitHub2.css" rel="stylesheet" type="text/css">
   <link href="/pygments.css" rel="stylesheet" type="text/css">
+  <link href="/bootstrap.css" rel="stylesheet" type="text/css">
   HTML
     html.insert(0, head)
     doc = Nokogiri::HTML(html)
