@@ -1,10 +1,11 @@
-# encoding: utf-8
+#!/usr/bin/env ruby
 require 'yaml'
 require 'fileutils'
 require 'rb-fsevent'
 
 script_dir = File.dirname(File.expand_path(__FILE__))
-markdown_dirs = YAML.load_file('config/nvalt.yml')['markdown_dir']
+config_dir = File.expand_path('../config', script_dir)
+markdown_dirs = YAML.load_file(File.join(config_dir, 'nvalt.yml'))['markdown_dir']
 options = ['--latency', 1.0.to_s, '--no-defer']
 
 MARKDOWN_RE = /\.(md|markdown|txt)$/
@@ -24,6 +25,5 @@ fsevent.watch markdown_dirs, options do |directories|
   begin_time = Time.now
 end
 
+Process.daemon
 fsevent.run
-
-
