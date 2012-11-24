@@ -1,5 +1,4 @@
 # encoding: utf-8
-gem 'redcarpet', '=2.1.1'
 require 'redcarpet'
 require 'nokogiri'
 require 'pygments.rb'

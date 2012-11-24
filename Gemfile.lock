@@ -89,7 +89,7 @@ GEM
     rb-fsevent (0.9.1)
     rdoc (3.12)
       json (~> 1.4)
-    redcarpet (2.1.1)
+    redcarpet (2.2.2)
     rubypython (0.5.3)
       blankslate (>= 2.1.2.3)
       ffi (~> 1.0.7)
@@ -124,7 +124,7 @@ DEPENDENCIES
   pygments.rb
   rails (= 3.2.8)
   rb-fsevent
-  redcarpet (~> 2.1.1)
+  redcarpet (~> 2.2.2)
   sass-rails (~> 3.2.3)
   sqlite3
   uglifier (>= 1.0.3)

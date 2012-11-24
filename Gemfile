@@ -15,7 +15,7 @@ gem 'rb-fsevent', :require => false
 gem 'jquery-rails'
 
 ## markdown
-gem 'redcarpet', '~> 2.1.1'
+gem 'redcarpet', '~> 2.2.2'
 gem 'nokogiri'
 gem 'pygments.rb'
 
