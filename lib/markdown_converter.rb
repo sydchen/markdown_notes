@@ -13,16 +13,17 @@ class MarkdownConverter
   end
 
   def to_html(text)
-    flags = {
+    extensions = {
+      :fenced_code_blocks => true,
       :autolink => true,
-      :fenced_code_blocks => true, 
       :tables => true,
       :strikethrough => true,
-      :lax_htmlblock => true,
-      :no_intraemphasis => true
+      :lax_spacing => true,
+      :no_intra_emphasis => true
     }
-
-    markdown = Redcarpet::Markdown.new(Redcarpet::Render::HTML, flags)
+ 
+    render = Redcarpet::Render::HTML.new
+    markdown = Redcarpet::Markdown.new(render, extensions)
     data = markdown.render(text)
   end
 
