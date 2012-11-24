@@ -1,4 +1,4 @@
-require 'convert'
+require 'markdown_converter'
 
 class Note < ActiveRecord::Base
   attr_accessible :title, :content, :updated_at
