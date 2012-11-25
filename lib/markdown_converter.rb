@@ -3,6 +3,7 @@ require 'redcarpet'
 require 'nokogiri'
 require 'pygments.rb'
 require 'fileutils'
+require 'my_renderer'
 
 class MarkdownConverter
   MARKDOWN_RE = /\.(md|markdown|txt)$/
@@ -10,21 +11,6 @@ class MarkdownConverter
   def initialize(file_name)
     @file_name = file_name
     @outout_file_name = file_name.sub(MARKDOWN_RE, '.html')
-  end
-
-  def to_html(text)
-    extensions = {
-      :fenced_code_blocks => true,
-      :autolink => true,
-      :tables => true,
-      :strikethrough => true,
-      :lax_spacing => true,
-      :no_intra_emphasis => true
-    }
- 
-    render = Redcarpet::Render::HTML.new
-    markdown = Redcarpet::Markdown.new(render, extensions)
-    data = markdown.render(text)
   end
 
   def to_s
@@ -40,6 +26,26 @@ class MarkdownConverter
     File.open(output_file_path, 'w') do |f|
       f.write(to_s)
     end
+  end
+
+  private 
+
+  def to_html(text)
+    extensions = {
+      :fenced_code_blocks => true,
+      :autolink => true,
+      :tables => true,
+      :strikethrough => true,
+      :lax_spacing => true,
+      :no_intra_emphasis => true
+    }
+ 
+    #render = Redcarpet::Render::HTML.new
+    render = MyHTMLRenderer.new
+    markdown = Redcarpet::Markdown.new(render, extensions)
+    data = markdown.render(text)
+    p "stack: ",render.stack
+    data
   end
 
   def syntax_highlighter(html)
