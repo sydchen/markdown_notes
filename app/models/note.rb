@@ -3,6 +3,10 @@ require 'convert'
 class Note < ActiveRecord::Base
   attr_accessible :title, :content, :updated_at
 
+  searchable do
+    text :title, :content
+  end
+
   def self.from_file(file_path, title)
     markdown = MarkdownConverter.new(file_path)
     html_source = markdown.to_s
