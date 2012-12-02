@@ -1,9 +1,19 @@
-<div id="records">
-  <%= form_tag note_index_path, :method => 'get', :id => "notes_search" do %>
-    <p>
-      <%= text_field_tag :search, params[:search] %>
-      <%= submit_tag "Search", :name => nil %>
-    </p>
-    <div id="notes"><%= render 'notes' %></div>
-  <% end %>
+<div class="container-fluid">
+  <div class="row-fluid">
+    <div class="span3">
+      <div id="records">
+        <%= form_tag note_index_path, :method => 'get', :id => "notes_search" do %>
+          <p>
+            <%= text_field_tag :search, params[:search] %>
+            <%= submit_tag "Search", :name => nil %>
+          </p>
+          <div id="notes"><%= render 'notes' %></div>
+        <% end %>
+      </div>
+    </div>
+    <div class="span9">
+      <div id="content">
+      </div>
+    </div>
+  </div>
 </div>

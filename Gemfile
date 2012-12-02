@@ -5,6 +5,10 @@ gem 'rails', '3.2.8'
 gem 'sunspot_rails'
 gem 'sunspot_solr'
 
+gem "therubyracer"
+gem "less-rails"
+gem "twitter-bootstrap-rails"
+
 # Bundle edge Rails instead:
 # gem 'rails', :git => 'git://github.com/rails/rails.git'
 
