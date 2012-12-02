@@ -12,6 +12,7 @@
 //
 //= require jquery
 //= require jquery_ujs
+//= require twitter/bootstrap
 //= require_tree .
 
 $(function () {
@@ -19,6 +20,7 @@ $(function () {
               $.getScript(this.href);
                   return false;
                     });
+
 
   // Search form.
      $('#notes_search').submit(function () {
