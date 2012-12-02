@@ -80,3 +80,22 @@ pre code {
   max-height: 340px;
   overflow-y: scroll;
 }
+
+#container {
+    width:960px;
+    margin:20px auto;
+}
+
+#content {
+    float:left;
+    width:620px;
+}
+
+#sidebar {
+    float:right;
+    width:340px;
+}
+
+#footer {
+    clear:both;
+}

@@ -49,7 +49,7 @@ class MarkdownConverter
   <link href="/pygments.css" rel="stylesheet" type="text/css">
   <link href="/bootstrap.css" rel="stylesheet" type="text/css">
   HTML
-    html.insert(0, head)
+    #html.insert(0, head)
     doc = Nokogiri::HTML(html)
 
     doc.search("//pre//code[@class]/..").each do |pre|

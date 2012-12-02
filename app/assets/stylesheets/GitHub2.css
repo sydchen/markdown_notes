@@ -276,9 +276,3 @@ pre {
     background-color: transparent;
     border: none; }
 
-@media screen and (min-width: 914px) {
-    body {
-        width: 954px;
-        margin:0 auto;
-    }
-}
