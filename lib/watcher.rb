@@ -43,7 +43,7 @@ module NotesWatcher
 
   def write_pid(pid_file, pid)
     if File.exist? pid_file
-      if process_still_running?
+      if process_still_running? pid_file
         raise "Pidfile already exists at #{pid_file} and process is still running."
       else
         File.delete pid_file
@@ -57,8 +57,8 @@ module NotesWatcher
     end
   end
 
-  def process_still_running?
-    old_pid = open(PID_FILE).read.strip.to_i
+  def process_still_running?(pid_file)
+    old_pid = open(pid_file).read.strip.to_i
     Process.kill 0, old_pid
     true
   rescue Errno::ESRCH
