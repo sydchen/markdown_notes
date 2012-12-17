@@ -7,20 +7,21 @@ class Note < ActiveRecord::Base
     text :title, :content
   end
 
-  def self.from_file(file_path, title)
-    markdown = MarkdownConverter.new(file_path)
+  def self.from_file(file)
+    markdown = MarkdownConverter.new(file)
     html_source = markdown.to_s
 
+    title = File.basename(file)
     note = Note.find_by_title(title)
     if note != nil
-      file_mtime = File.new(file_path).mtime
+      file_mtime = File.new(file).mtime
       if note.updated_at < file_mtime
         puts "update: " + title
         note.update_attributes(:title => title, :content => html_source, :updated_at => file_mtime)
       end  
     else    
       puts "create: " + title
-      Note.create(:title => title, :content => html_source, :updated_at => File.new(file_path).mtime)
+      Note.create(:title => title, :content => html_source, :updated_at => File.new(file).mtime)
     end  
   end
 

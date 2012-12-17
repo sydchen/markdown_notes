@@ -8,8 +8,8 @@ def generate
   markdown_dirs.each do |markdown_dir|
     #markdown_files = Dir.glob(File.join(markdown_dir, '**')).grep(MARKDOWN_RE)
     markdown_files = Dir.glob(File.join(markdown_dir, '**', '*.{md,markdown,txt}'))
-    markdown_files.each do |file_name|
-      Note.from_file(file_name, File.basename(file_name))  
+    markdown_files.each do |file|
+      Note.from_file(file)  
     end
   end  
 end
