@@ -26,13 +26,13 @@
 .s { color: #dd2200; background-color: #fff0f0 } /* Literal.String */
 .na { color: #336699 } /* Name.Attribute */
 .nb { color: #003388 } /* Name.Builtin */
-.nc { color: #bb0066; font-weight: bold } /* Name.Class */
+.nc { color: #bb0066 } /* Name.Class */
 .no { color: #003366 } /* Name.Constant */
 .nd { color: #555555 } /* Name.Decorator */
 .ne { color: #bb0066; font-weight: bold } /* Name.Exception */
-.nf { color: #0066bb; font-weight: bold } /* Name.Function */
+.nf { color: #0066bb } /* Name.Function */
 .nl { color: #336699; font-style: italic } /* Name.Label */
-.nn { color: #bb0066; font-weight: bold } /* Name.Namespace */
+.nn { color: #bb0066 } /* Name.Namespace */
 .py { color: #336699; font-weight: bold } /* Name.Property */
 .nt { color: #bb0066; font-weight: bold } /* Name.Tag */
 .nv { color: #336699 } /* Name.Variable */
