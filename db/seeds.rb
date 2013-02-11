@@ -14,5 +14,10 @@ def generate
   end  
 end
 
+def reindex
+  Kernel.system "bundle exec rake sunspot:reindex"
+end
+
 #Note.delete_all
 generate
+reindex

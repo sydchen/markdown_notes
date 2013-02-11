@@ -1,0 +1,26 @@
+#!/usr/bin/env ruby
+
+root = File.expand_path('../../', __FILE__)
+$:.unshift File.expand_path('lib', root)
+require 'watcher'
+
+def usage
+  puts "usage: \n\t#{File.basename(__FILE__)} start|stop"
+end
+
+if ARGV.length < 1
+  usage
+  exit
+end
+
+Kernel.system "bundle exec rake sunspot:solr:start" unless File.exist? "log/sunspot-solr-development.log.lck"
+
+case ARGV[0]
+  when 'start'
+    NotesWatcher.start
+  when 'stop'
+    NotesWatcher.stop
+  else
+    usage
+end
+
