@@ -25,6 +25,7 @@ module NotesWatcher
     fsevent.watch markdown_dirs, options do |directories|
       directories.each do |directory|
         Dir.entries(directory).grep(MARKDOWN_RE).each do |file|
+          next if file =~ /~/
           file_name = File.join(directory, file)
           if File.stat(file_name).mtime > begin_time
             system("ruby #{script_dir}/update_notes.rb '#{file_name}'")
